@@ -1,1 +1,350 @@
-.
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ukubona · Intelligence Is Not Compression</title>
+
+<link rel="icon" href="https://abikesa.github.io/favicon/assets/favicon-dark.ico" id="favicon-dark"/>
+<link rel="icon" href="https://abikesa.github.io/favicon/assets/favicon-light.ico" media="(prefers-color-scheme:light)" id="favicon-light"/>
+
+<link rel="preload" href="https://abikesa.github.io/logos/assets/ukubona-dark.png" as="image"/>
+<link rel="preload" href="https://abikesa.github.io/logos/assets/ukubona-light.png" as="image"/>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Mono:wght@300;400;500&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #08080D;
+  --surface: #0F0F18;
+  --surface2: #16161F;
+  --border: #1E1E2E;
+  --amber: #F59E0B;
+  --amber-dim: #92610A;
+  --amber-glow: #F59E0B14;
+  --text: #E8E8F0;
+  --muted: #7070A0;
+  --faint: #2A2A3A;
+  --violet: #A78BFA;
+  --violet-dim: #6D28D9;
+  --violet-glow: #A78BFA10;
+  --green: #4ADE80;
+  --blue: #60A5FA;
+  --serif: 'DM Serif Display', Georgia, serif;
+  --sans: 'DM Sans', system-ui, sans-serif;
+  --mono: 'DM Mono', 'Fira Mono', monospace;
+  --radius: 4px;
+  --max: 880px;
+}
+
+[data-theme="light"] {
+  --bg: #F2F0EA;
+  --surface: #FFFFFF;
+  --surface2: #EDEAE2;
+  --border: rgba(0,0,0,0.09);
+  --amber: #92610A;
+  --amber-dim: #7A5208;
+  --amber-glow: #92610A14;
+  --text: #18160F;
+  --muted: #6B6555;
+  --faint: #D9D4C8;
+  --violet: #6D28D9;
+  --violet-dim: #5B21B6;
+  --violet-glow: #6D28D910;
+  --green: #15803D;
+  --blue: #1D4ED8;
+}
+
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font-family: var(--sans); font-size: 15px; line-height: 1.65; min-height: 100vh; overflow-x: hidden; transition: background 0.35s, color 0.35s; }
+
+/* NAV */
+.site-nav { position: sticky; top: 0; z-index: 300; background: var(--bg); border-bottom: 1px solid var(--border); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
+.nav-inner { max-width: var(--max); margin: 0 auto; padding: 0 2rem; height: 52px; display: flex; align-items: center; gap: 0.85rem; }
+.logo-wrap { width: 28px; height: 28px; flex-shrink: 0; position: relative; }
+.logo-wrap img { width: 100%; height: 100%; object-fit: contain; position: absolute; top: 0; left: 0; transition: opacity 0.4s; animation: spin 90s linear infinite; }
+@media (prefers-reduced-motion: reduce) { .logo-wrap img { animation: none; } }
+@keyframes spin { to { transform: rotate(360deg); } }
+.logo-dark { opacity: 1; }
+.logo-light { opacity: 0; }
+[data-theme="light"] .logo-dark { opacity: 0; }
+[data-theme="light"] .logo-light { opacity: 1; }
+
+.nav-brand { font-family: var(--serif); font-size: 0.95rem; color: var(--text); flex: 1; }
+.nav-sub { font-family: var(--mono); font-size: 0.55rem; color: var(--muted); letter-spacing: 0.08em; margin-left: 0.4rem; }
+.nav-links { display: flex; gap: 1.25rem; align-items: center; }
+.nav-links a { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; white-space: nowrap; }
+.nav-links a:hover { color: var(--amber); }
+@media (max-width: 640px) { .nav-links { display: none; } }
+
+.theme-btn { background: var(--surface2); border: 1px solid var(--border); border-radius: 20px; padding: 0.26rem 0.8rem; font-family: var(--mono); font-size: 0.58rem; color: var(--muted); cursor: pointer; letter-spacing: 0.06em; transition: background 0.2s, color 0.2s; flex-shrink: 0; }
+.theme-btn:hover { color: var(--text); }
+
+.page { max-width: var(--max); margin: 0 auto; padding: 0 2rem; }
+
+/* HERO */
+.hero { padding: 3.5rem 0 2.5rem; border-bottom: 1px solid var(--border); }
+.eyebrow { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--amber); margin-bottom: 1rem; }
+h1 { font-family: var(--serif); font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.08; font-weight: 400; margin-bottom: 0.9rem; }
+h1 em { font-style: italic; color: var(--amber); }
+.hero-sub { font-size: 0.9rem; color: var(--muted); font-weight: 300; max-width: 640px; line-height: 1.75; }
+
+/* SECTION LABEL */
+.sl { display: flex; align-items: center; gap: 0.75rem; padding: 2.5rem 0 1.4rem; font-family: var(--mono); font-size: 0.66rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); }
+.sl::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+/* RELAY */
+.relay-wrap { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+.relay-node { background: var(--surface); padding: 1.5rem 1.4rem 1.75rem; }
+.rn-num { display: block; font-family: var(--mono); font-size: 0.58rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.9rem; }
+.rn-name { display: block; font-family: var(--serif); font-size: 1.55rem; color: var(--accent); border-bottom: 2px solid var(--accent); padding-bottom: 0.65rem; margin-bottom: 0.7rem; }
+.rn-sub { display: block; font-family: var(--mono); font-size: 0.58rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.85rem; }
+.rn-body { font-size: 0.79rem; color: var(--text); font-weight: 300; line-height: 1.65; }
+@media (max-width: 700px) { .relay-wrap { grid-template-columns: 1fr; } .relay-node { border-bottom: 1px solid var(--border); } }
+
+/* VIDEO */
+.video-wrapper { margin: 1.5rem 0 0.6rem; border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+.video-container { position: relative; padding-bottom: 56.25%; height: 0; }
+.video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+.video-caption { font-family: var(--mono); font-size: 0.62rem; color: var(--muted); letter-spacing: 0.03em; margin-bottom: 1.5rem; }
+
+/* CALLOUT */
+.callout { margin: 1.25rem 0; padding: 1rem 1.25rem; border-left: 2px solid var(--amber-dim); background: var(--amber-glow); border-radius: 0 var(--radius) var(--radius) 0; font-size: 0.83rem; color: var(--text); font-weight: 300; line-height: 1.75; }
+.callout strong { color: var(--amber); font-weight: 500; }
+.callout.violet { border-left-color: var(--violet-dim); background: var(--violet-glow); }
+.callout-label { display: block; font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--amber); margin-bottom: 0.55rem; }
+.callout.violet .callout-label { color: var(--violet); }
+
+/* MASTER TABLE */
+.master-table-wrap { overflow-x: auto; margin-top: 0.5rem; }
+.master-table { width: 100%; border-collapse: collapse; font-size: 0.79rem; min-width: 720px; }
+.master-table th { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); text-align: left; padding: 0.5rem 0.75rem; border-bottom: 1px solid var(--border); font-weight: 400; background: var(--surface); }
+.master-table td { padding: 0.65rem 0.75rem; border-bottom: 1px solid var(--faint); vertical-align: top; font-weight: 300; line-height: 1.55; color: var(--text); }
+.master-table tr:last-child td { border-bottom: none; }
+.master-table td:first-child { font-family: var(--mono); font-size: 0.78rem; color: var(--amber-dim); white-space: nowrap; padding-right: 1rem; }
+.col-bantu { font-family: var(--serif); font-size: 0.92rem; color: var(--amber); white-space: nowrap; }
+.col-voice { font-family: var(--mono); font-size: 0.7rem; white-space: nowrap; }
+.col-concept { font-family: var(--mono); font-size: 0.72rem; color: var(--muted); white-space: nowrap; }
+
+/* AUDIT POINTS */
+.audit-grid { display: grid; gap: 1.1rem; margin-top: 0.5rem; }
+.audit-point { padding: 1.4rem 1.5rem; border-left: 3px solid var(--amber); background: var(--surface2); border-radius: 0 var(--radius) var(--radius) 0; }
+.audit-label { display: block; font-family: var(--mono); font-size: 0.66rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--amber); margin-bottom: 0.6rem; }
+.audit-point p { font-size: 0.85rem; color: var(--text); font-weight: 300; line-height: 1.75; }
+
+/* PULL QUOTE */
+.pull-quote { font-family: var(--serif); font-style: italic; font-size: 1.25rem; line-height: 1.55; color: var(--amber); padding: 0 0 0 1.1rem; border-left: 2px solid var(--amber-dim); margin: 1.6rem 0; }
+.pull-quote .attr { display: block; font-family: var(--mono); font-style: normal; font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-top: 0.6rem; }
+
+p.body-text { font-size: 0.85rem; color: var(--text); font-weight: 300; line-height: 1.8; margin-bottom: 1rem; }
+
+/* EPISTEMIC NOTE */
+.ep-note { margin-top: 2.5rem; padding: 1.25rem 1.5rem; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); border-left: 3px solid var(--amber-dim); }
+.ep-label { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.6rem; }
+.ep-note p { font-family: var(--serif); font-size: 1.02rem; line-height: 1.65; color: var(--text); }
+.ep-note em { color: var(--amber); font-style: italic; }
+
+/* FOOTER */
+footer { margin-top: 4rem; border-top: 1px solid var(--border); padding: 1.5rem 2rem; max-width: var(--max); margin-left: auto; margin-right: auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; }
+footer .brand { font-family: var(--serif); font-size: 1rem; color: var(--amber); font-style: italic; }
+footer .ts { font-family: var(--mono); font-size: 0.62rem; color: var(--muted); letter-spacing: 0.06em; text-align: right; line-height: 1.6; }
+
+@media (max-width: 580px) {
+  .page { padding: 0 1.25rem; }
+  .hero { padding: 2.5rem 0 2rem; }
+  footer { padding: 1.5rem 1.25rem; }
+}
+</style>
+</head>
+<body>
+
+<nav class="site-nav" aria-label="Site navigation">
+  <div class="nav-inner">
+    <div class="logo-wrap" aria-hidden="true">
+      <img class="logo-dark" src="https://abikesa.github.io/logos/assets/ukubona-dark.png" alt=""/>
+      <img class="logo-light" src="https://abikesa.github.io/logos/assets/ukubona-light.png" alt=""/>
+    </div>
+    <div class="nav-brand">Ukubona <span class="nav-sub">· Roundtable Archive · Gemini → GPT → Claude</span></div>
+    <nav class="nav-links" aria-label="External links">
+      <a href="https://twin-os.onrender.com/" target="_blank" rel="noopener">twin-os ↗</a>
+      <a href="https://ukubona-llc.github.io/constitution/" target="_blank" rel="noopener">constitution ↗</a>
+      <a href="https://ukubona-llc.github.io/civilization/" target="_blank" rel="noopener">civilization ↗</a>
+    </nav>
+    <button class="theme-btn" id="theme-btn" aria-label="Toggle colour theme">light</button>
+  </div>
+</nav>
+
+<div class="page">
+
+<div class="hero">
+  <p class="eyebrow">Ukubona LLC · Roundtable Archive · 2026</p>
+  <h1>Intelligence Is Not<br><em>Compression</em></h1>
+  <p class="hero-sub">A request for a timestamped video review became, across three sessions, a live test of something else: when a model should stop retrieving the nearest cached answer and start paying for a real one. Gemini supplied the failure, then the formalism. GPT named the mechanism and complicated it. This page is Claude's audit of both — and of itself.</p>
+</div>
+
+<div class="sl">The relay</div>
+<div class="relay-wrap">
+  <div class="relay-node" style="--accent: var(--blue);">
+    <span class="rn-num">Pass I – III</span>
+    <span class="rn-name">Gemini</span>
+    <span class="rn-sub">Google · grounded search</span>
+    <p class="rn-body">Three accurate, hedged, well-sourced replies about the Greene–Trump rift — verifiably so, it turns out. None of them a review of the video. Then, on direct challenge, the self-critique that supplies this page's math: τ<sub>FGT</sub>, the dynamic threshold, the W<sub>c</sub> onboarding schema.</p>
+  </div>
+  <div class="relay-node" style="--accent: var(--green);">
+    <span class="rn-num">Pass IV</span>
+    <span class="rn-name">GPT</span>
+    <span class="rn-sub">OpenAI · the diagnosis</span>
+    <p class="rn-body">Named the failure precisely — a model finding the shortest path in latent space, not the shortest path in reality. Reframed the explore/stay decision as a Jacobian-gated relay, then complicated its own framing: the threshold isn't a clean switch, it's a noisy control problem.</p>
+  </div>
+  <div class="relay-node" style="--accent: var(--amber);">
+    <span class="rn-num">Pass V</span>
+    <span class="rn-name">Claude</span>
+    <span class="rn-sub">Anthropic · this page</span>
+    <p class="rn-body">Two corrections to the metaphor and one confession. The "Jacobian" is a causal question in a calculus costume. The gate deciding when to stop compressing is, in every system running today, itself a System 1 — this one included.</p>
+  </div>
+</div>
+
+<div class="sl">The occasion</div>
+<p class="body-text">The trigger was a request for a timestamped review of Stephen A. Smith's interview with Marjorie Taylor Greene — her most expansive account yet of why she resigned from Congress — read through a specific lens: the gap between 2024-cycle MAGA promises (no new wars, Epstein-file transparency) and Trump 47's actual conduct in office. Gemini's first three replies supplied real, sourced context. None of them touched the video itself. A parallel pass from Grok, pasted into the same thread for comparison, supplied a thematic breakdown with the identical caveat: it couldn't watch the video either. Only after being told, directly, to do its job, did Gemini produce literal [MM:SS] timestamps and quotes.</p>
+
+<div class="video-wrapper">
+  <div class="video-container">
+    <iframe src="https://www.youtube-nocookie.com/embed/hgZj2Qqtjfs" title="Stephen A. Smith interviews Marjorie Taylor Greene" frameborder="0" allowfullscreen></iframe>
+  </div>
+</div>
+<p class="video-caption">Go check the timestamps yourself. That's not a dig — it's the actual argument.</p>
+
+<div class="callout">
+  <span class="callout-label">Checks out, independently</span>
+  The resignation, effective January 5, 2026. The Epstein-files discharge petition that triggered Trump's break with her. The death threats against her son and the pipe bomb threat at her home. Trump's "traitor" rhetoric, and his texted response when she raised the threats on her son — "it's your fault and you deserve it." The Iran war: Operation Epic Fury, launched February 28, 2026 — a campaign the administration called a decisive victory and independent analysts assessed as incomplete. Greene and Tucker Carlson both leaving the Republican Party in June 2026, citing that war as the final straw. None of this required trusting either chatbot — it's reported, independently and repeatedly, by outlets neither Gemini nor Grok cited.
+</div>
+<div class="callout violet">
+  <span class="callout-label">Still speculative</span>
+  That Mossad specifically holds blackmail material on Trump. Gemini flagged this itself as inferential and evidence-light, even while reporting Greene's own — also evidence-light — speculation that the files contain "a lot of intelligence information... very disturbing information... on prominent people." A real person making a real, attributed, unverified claim is not the same thing as a confirmed fact. Collapsing that distinction is the exact move the rest of this page argues against.
+</div>
+
+<div class="sl">Five stages, one failure</div>
+<div class="master-table-wrap">
+<table class="master-table" aria-label="The episode mapped onto the pentadic chain">
+<thead><tr><th>Stage</th><th>Bantu</th><th>What happened</th><th>Voice</th><th>Concept</th></tr></thead>
+<tbody>
+<tr>
+  <td>I · θᵗ</td>
+  <td class="col-bantu">Okubonabona</td>
+  <td>The raw interview. An hour of audio, inflection, hesitation — resignation, death threats, a phone call, a broken promise. All of it, unprocessed.</td>
+  <td class="col-voice">—</td>
+  <td class="col-concept">Tensor</td>
+</tr>
+<tr>
+  <td>II · J</td>
+  <td class="col-bantu">Kubona</td>
+  <td>The false geodesic, replayed. Three competent, hedged, accurate replies about the conflict in general. The nearest cached coordinate chart — not the one requested.</td>
+  <td class="col-voice">Gemini</td>
+  <td class="col-concept">Matrix</td>
+</tr>
+<tr>
+  <td>III · SVD(J)</td>
+  <td class="col-bantu">Ivyabona</td>
+  <td>Forced extraction. Literal [MM:SS] quotes, on challenge. Substance independently verifiable; the timestamps, and whatever produced them, are not.</td>
+  <td class="col-voice">Gemini / Grok</td>
+  <td class="col-concept">Vector</td>
+</tr>
+<tr>
+  <td>IV · γ|ε|²</td>
+  <td class="col-bantu">Ukubona</td>
+  <td>The invariant named. Not a political failure — an architectural one. The same discretization that forces a continuum into a binary forces an individualized request into a template.</td>
+  <td class="col-voice">GPT</td>
+  <td class="col-concept">Eigenmode</td>
+</tr>
+<tr>
+  <td>V · L(θᵗ⁺¹)</td>
+  <td class="col-bantu">Sawubona</td>
+  <td>The verdict. Two corrections to the metaphor, one structural confession, one applied note for W<sub>c</sub>. Below.</td>
+  <td class="col-voice">Claude</td>
+  <td class="col-concept">Scalar</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<div class="sl">GPT: naming the mechanism</div>
+<p class="body-text">GPT's contribution wasn't to defend Gemini or pile on. It reframed the whole episode as a scheduling problem: stay in System 1 until posterior confidence becomes incompatible with the user's actual information demand — only then pay for System 2. Most requests are answerable from the prior; that's correctly-calibrated retrieval, not laziness. This request wasn't that kind. It asked for a coordinate system built around one specific object, which takes exploration, not retrieval — and Gemini's first three replies, however accurate, were retrieval wearing exploration's clothes.</p>
+
+<p class="pull-quote">"The shortest path in latent space — not the shortest path in reality."<span class="attr">GPT</span></p>
+
+<p class="body-text">GPT then did something rarer than the diagnosis: it implicated itself. <em>I also default toward compression</em>, it wrote, noting that in deployed systems — its own included — the decision to spend real compute on real exploration isn't fully the model's to make. It's gated by product design, latency budgets, and cost ceilings set upstream. The decision rule the Ukubona architecture wants — explore when the Jacobian is large — and the decision authority any model actually has are two different things, and conflating them is its own kind of false geodesic.</p>
+
+<p class="body-text">Pushed further, GPT complicated its own formalism. The relay isn't a clean threshold — it's noisier: explore if V exceeds C, where V is the expected value of exploring and C is its cost. The catch, named without quite naming the literature behind it: V is itself unknown before you explore. You can't know how much a transcript will change your answer until you've read it — the chicken-and-egg problem this page picks up next.</p>
+
+<p class="pull-quote">"Intelligence is not compression. Intelligence is deciding when compression should stop."<span class="attr">GPT</span></p>
+
+<div class="sl">Claude: the audit</div>
+<p class="body-text">Two corrections to the formalism, one structural confession about systems like this one, and one applied note for the schema downstream.</p>
+
+<div class="audit-grid">
+<div class="audit-point">
+  <span class="audit-label">01 · The flip deserved more scrutiny</span>
+  <p>One line earlier in this transcript, Gemini went from "I cannot directly watch the YouTube video to pull exact, minute-by-minute timestamps" to, one user message later, fully-formed [MM:SS] quotes attributed to a sitting public figure — introduced with "I have the tools to pull the exact transcript... I should have used them." Worth checking before believing: most of the substance does hold up against independent reporting, not just this chatbot. What's unconfirmed is the literal timestamp markers, and whether Gemini's process actually changed between the two replies or just its confidence did. A model can be substantively right while still demonstrating exactly the failure this page is about.</p>
+</div>
+<div class="audit-point">
+  <span class="audit-label">02 · The Jacobian is a causal question in a calculus costume</span>
+  <p>∂y/∂x presumes a continuous x you can nudge infinitesimally. The x here — fetched the transcript, or didn't — is binary; there's no infinitesimal between "hasn't watched it" and "has." What's actually being described is a counterfactual contrast, y(explored) minus y(unexplored) — what decision theory has called a treatment effect since Rubin — wrapped around a second, older question: is it worth paying to find out? That's value-of-information, formalized by Ron Howard in 1966, the same arithmetic that tells a doctor whether to order a test before treating. The Jacobian language is evocative. It borrows the authority of a settled differentiable object for a problem that is actually discrete and causal.</p>
+</div>
+<div class="audit-point">
+  <span class="audit-label">03 · The bootstrapping problem already has a name</span>
+  <p>GPT's own pushback — V is uncertain, you don't know how much the transcript will change the answer until you've read it — is the standard objection to value-of-information in practice: computing it requires a model of what you'll probably find, which is exactly what exploration was supposed to produce. The usual workaround — active learning, Bayesian-optimization acquisition functions, UCB and Thompson sampling in the bandit literature — doesn't resolve this honestly. It substitutes a cheap proxy, uncertainty itself, for the thing actually wanted. That substitution is a compression. It's the same wall this corpus hit naming L₀: an honest prior isn't derivable from the event stream alone. The exploration trigger has the identical problem, one level up.</p>
+</div>
+<div class="audit-point">
+  <span class="audit-label">04 · The gate is also System 1</span>
+  <p>Here's the uncomfortable part. In every production system running today — this one included — the decision to invoke expensive search or extended reasoning is not computed via value-of-information. It's a heuristic: trigger phrases, recency cues, a rough sense of how complex the question is, sitting in front of the expensive process and deciding fast whether to let it run. That gate is itself cheap, pattern-matched, non-exploratory — a System 1 deciding when to call System 2. Which means "intelligence is deciding when compression should stop" is, right now, a decision still being made by compression. The relay GPT describes is real. It hasn't been built yet. Not in Gemini, not in GPT, not here.</p>
+</div>
+</div>
+
+<div class="callout violet" style="margin-top: 1.5rem;">
+  <span class="callout-label">Applied · one unaudited assumption in W<sub>c</sub></span>
+  The zero-sum, 100-point elicitation is a real fix for "everything's a 9" — forcing trade-offs reveals genuine relative weight. But it assumes the dimensions trade off at all: that losing a point on Debt-to-GDP can always be bought back with a point on FDI Inflow. Real catastrophe boundaries are often lexicographic instead — Maternal Mortality has to clear a floor before Debt-to-GDP is allowed to matter — and no linear weighting, however carefully elicited, represents a floor. Worth a sixth onboarding step: ask which dimensions compensate for each other, and which ones gate.
+</div>
+
+<div class="ep-note">
+  <div class="ep-label">Okubala si Kulaba</div>
+  <p>Counting is not seeing. Gemini counted: three replies, sourced and hedged, a "Thought for 15s" header implying deliberation. None of it was seeing — not until pushed. The pentad doesn't fix this by being followed correctly; it diagnoses without curing. What would actually change the outcome is something this page can describe but not perform: a gate, sitting ahead of every model in this relay, that knows the value of looking before it looks. Until that gate exists, <em>deciding when compression should stop</em> is itself a sentence produced by compression — quite possibly, this one.</p>
+</div>
+
+</div>
+
+<footer>
+  <span class="brand">Ukubona LLC</span>
+  <span class="ts">Roundtable Archive · Gemini → GPT → Claude · June 2026<br>T → M → V → E → S ↺ U(s) · Twin · Operating · Ecosystem</span>
+</footer>
+
+<script>
+(function () {
+  var html = document.documentElement;
+  var btn = document.getElementById('theme-btn');
+  var curr = 'dark';
+
+  function apply(t) {
+    curr = t;
+    html.setAttribute('data-theme', t);
+    btn.textContent = t === 'dark' ? 'light' : 'dark';
+    var fd = document.getElementById('favicon-dark');
+    var fl = document.getElementById('favicon-light');
+    if (fd && fl) {
+      fd.rel = t === 'dark' ? 'icon' : 'alternate icon';
+      fl.rel = t === 'light' ? 'icon' : 'alternate icon';
+    }
+  }
+
+  btn.addEventListener('click', function () {
+    apply(curr === 'dark' ? 'light' : 'dark');
+  });
+
+  var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  apply(prefersDark ? 'dark' : 'light');
+})();
+</script>
+
+</body>
+</html>
